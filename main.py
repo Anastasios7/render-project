@@ -43,67 +43,67 @@ import os
 # Ρύθμιση ακρίβειας δεκαδικών ψηφίων
 getcontext().prec = 15
 
-filename = "latest_table_paper2.xlsx"
-
-
-# Ορίζουμε τα εύρη τιμών
-r_values = np.linspace(0.01, 0.04, 31)
-rho_v = np.linspace(-1, 1, 11)
-d_v = np.linspace(0.2,0.01, 30)
-
-m = np.log(0.1)
-v = 1/np.sqrt(2)
-k0 = 4
-k1 = 2
-c = 1
-loko = 2
-
-def f(y):
-    return 0.05 + (np.tanh(loko * (y - m)) + 1) * (0.3 - 0.05) / 2
-
-# Φτιάχνουμε τη λίστα
-combinations = []
-
-for rho in rho_v:
-    for r in r_values:
-        mi_values = np.arange(0.005, r - 0.001 + 1e-8, 0.001)
-        for mi in mi_values:
-            for d in d_v:
-                # Στρογγυλοποιούμε ΜΟΝΟ όταν φτιάχνουμε το tuple
-                combinations.append((
-                    np.round(d, 5),
-                    np.round(r, 5),
-                    np.round(mi, 5),
-                    np.round(rho, 5)
-                ))
-
-print(f"Συνολικά combinations: {len(combinations)}")
-
-
-N=250
-M=15
-
-ppmax=2.5
-ppmin=0
-
-
-Pmax=ppmax-ppmin
-
-yymax=m+3*v*v
-yymin=m-3*v*v
-Ymax=yymax-yymin
-yrange=6*v*v
-
-
-
-dp=Pmax/N
-dy=Ymax/M
-
-iterate=0
-
-overall_start_time = time.time()
-
 def run_all_combinations():
+    filename = "latest_table_paper2.xlsx"
+
+
+    # Ορίζουμε τα εύρη τιμών
+    r_values = np.linspace(0.01, 0.04, 31)
+    rho_v = np.linspace(-1, 1, 11)
+    d_v = np.linspace(0.2,0.01, 30)
+
+    m = np.log(0.1)
+    v = 1/np.sqrt(2)
+    k0 = 4
+    k1 = 2
+    c = 1
+    loko = 2
+
+    def f(y):
+        return 0.05 + (np.tanh(loko * (y - m)) + 1) * (0.3 - 0.05) / 2
+
+    # Φτιάχνουμε τη λίστα
+    combinations = []
+
+    for rho in rho_v:
+        for r in r_values:
+            mi_values = np.arange(0.005, r - 0.001 + 1e-8, 0.001)
+            for mi in mi_values:
+                for d in d_v:
+                    # Στρογγυλοποιούμε ΜΟΝΟ όταν φτιάχνουμε το tuple
+                    combinations.append((
+                        np.round(d, 5),
+                        np.round(r, 5),
+                        np.round(mi, 5),
+                        np.round(rho, 5)
+                    ))
+
+    print(f"Συνολικά combinations: {len(combinations)}")
+
+
+    N=250
+    M=15
+
+    ppmax=2.5
+    ppmin=0
+
+
+    Pmax=ppmax-ppmin
+
+    yymax=m+3*v*v
+    yymin=m-3*v*v
+    Ymax=yymax-yymin
+    yrange=6*v*v
+
+
+
+    dp=Pmax/N
+    dy=Ymax/M
+
+    iterate=0
+
+    overall_start_time = time.time()
+
     for d,r , mi, rho in combinations:
         print(iterate+1,d,r , mi, rho)
 
