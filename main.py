@@ -717,11 +717,12 @@ def home():
 def download_excel():
     return send_file(filename, as_attachment=True)
 
-# 🚀 Εκκίνηση loop σε background thread ώστε Flask να είναι live
-threading.Thread(target=run_all_combinations, daemon=True).start()
 
 # ✅ Εκκίνηση Flask server
 if __name__ == "__main__":
+    # 🚀 Εκκίνηση loop σε background thread ώστε Flask να είναι live
+    threading.Thread(target=run_all_combinations, daemon=True).start()
+    time.sleep(2)
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=10000)
 
