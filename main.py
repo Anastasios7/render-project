@@ -699,17 +699,12 @@ def run_all_combinations():
         print('✅ We are now at',iterate,'out of',len(combinations),'. Percentage:',100*iterate/len(combinations),'Average Run:',elapsed_min/iterate,'Run:',elapsed_min)
 
         # ✅ Αποθήκευση κάθε 10 φορές
-        if i % 10 == 0:
+        if iterate % 10 == 0:
             with pd.ExcelWriter(filename, engine='openpyxl') as writer:
                 table_to_4_final.to_excel(writer, sheet_name="P_to_4", index=True, header=False)
                 table_from_minus2_final.to_excel(writer, sheet_name="P_from_minus2", index=True, header=False)
             print(f"✅ Excel updated at i = {i}")
 
-        print("== Πίνακας με P (to 4) ==")
-        print(table_to_4_final)
-
-        print("== Πίνακας με P (from -2) ==")
-        print(table_from_minus2_final)
 
 # 🌐 Flask app για κατέβασμα
 app = Flask(__name__)
