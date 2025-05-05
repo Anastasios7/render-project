@@ -722,7 +722,7 @@ def download_excel():
 if __name__ == "__main__":
     # 🚀 Εκκίνηση loop σε background thread ώστε Flask να είναι live
     threading.Thread(target=run_all_combinations, daemon=True).start()
-    time.sleep(2)
+    time.sleep(15)
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=10000)
 
