@@ -476,29 +476,28 @@ def run_all_combinations():
         ###### ########### ########### ######### ######### ###### ########### ########### ######### #########
 
         # Παράδειγμα χρήσης
-        if __name__ == "__main__":
-            # Πρώτο σύστημα (prob 0)
-            A0_prob = T0_n
-            b0_prob = b0_n
+        # Πρώτο σύστημα (prob 0)
+        A0_prob = T0_n
+        b0_prob = b0_n
 
-            # Δεύτερο σύστημα (prob 1)
-            A1_prob = T1_n
-            b1_prob = b1_n
-            # Ξεκινάμε τη μέτρηση
-            start_time = time.time()
-            try:
-                solution0_prob, solution1_prob, iterations, apo0,apo1 = solve_two_same_size_systems(
+        # Δεύτερο σύστημα (prob 1)
+        A1_prob = T1_n
+        b1_prob = b1_n
+        # Ξεκινάμε τη μέτρηση
+        start_time = time.time()
+        try:
+            solution0_prob, solution1_prob, iterations, apo0,apo1 = solve_two_same_size_systems(
                     A0_prob, b0_prob, A1_prob, b1_prob, x0_start, x1_start,1e-8, max_iter=100000000
                 )
-            except ValueError as e:
-                print(e)
+        except ValueError as e:
+             rint(e)
 
-            # Υπολογισμός του χρόνου εκτέλεσης
-            end_time = time.time()
-            execution_time_seconds = end_time - start_time
-            execution_time_minutes = execution_time_seconds / 60
+        # Υπολογισμός του χρόνου εκτέλεσης
+        end_time = time.time()
+        execution_time_seconds = end_time - start_time
+        execution_time_minutes = execution_time_seconds / 60
 
-            print(f"Χρόνος εκτέλεσης: {execution_time_minutes:.2f} λεπτά")
+        print(f"Χρόνος εκτέλεσης: {execution_time_minutes:.2f} λεπτά")
 
         ###### ########### ########### ######### ######### ###### ########### ########### ######### #########
         ###### ########### ########### ######### ######### ###### ########### ########### ######### #########
@@ -725,7 +724,7 @@ def run_all_combinations():
             with pd.ExcelWriter(filename, engine='openpyxl') as writer:
                 table_to_4_final.to_excel(writer, sheet_name="P_to_4", index=True, header=False)
                 table_from_minus2_final.to_excel(writer, sheet_name="P_from_minus2", index=True, header=False)
-            print(f"✅ Excel updated at i = {i}")
+            print(f"✅ Excel updated at iterate = {iterate}")
 
 
 
@@ -736,7 +735,7 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
 
     # 🔄 Αναμονή για να ξεκινήσει πρώτα το Flask σωστά
-    time.sleep(1000)
+    time.sleep(10)
 
     # ▶️ Ξεκίνα τον βαρύ υπολογισμό στο background
     threading.Thread(target=run_all_combinations, daemon=True).start()
