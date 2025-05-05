@@ -21,9 +21,6 @@ from scipy.optimize import fsolve
 import matplotlib.pyplot as plt
 import time
 from scipy.optimize import fsolve
-from tkinter import Tk, ttk, Canvas
-from tkinter import Scrollbar
-from tksheet import Sheet
 import sys
 from PyQt5.QtWidgets import QApplication, QTableWidget, QTableWidgetItem, QPushButton
 from PyQt5.QtGui import QColor
