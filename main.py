@@ -38,6 +38,7 @@ from openpyxl.styles import PatternFill
 from itertools import product
 from flask import Flask, send_file
 import threading
+import os
 
 # Ρύθμιση ακρίβειας δεκαδικών ψηφίων
 getcontext().prec = 15
