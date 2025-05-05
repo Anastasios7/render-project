@@ -50,7 +50,7 @@ def run_all_combinations():
     # Ορίζουμε τα εύρη τιμών
     r_values = np.linspace(0.01, 0.04, 31)
     rho_v = np.linspace(-1, 1, 11)
-    d_v = np.linspace(0.2,0.01, 30)
+    d_v = np.linspace(0.3,0.01, 30)
 
     m = np.log(0.1)
     v = 1/np.sqrt(2)
