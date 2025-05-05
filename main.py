@@ -40,32 +40,14 @@ import os
 
 
 
-# Ρύθμιση ακρίβειας δεκαδικών ψηφίων
-getcontext().prec = 15
-
-
-# ✅ Flask app
-app = Flask(__name__)
-
-# ✅ Όνομα αρχείου Excel που δημιουργείται
-filename = "Paper 2 Machine Learning 01.xlsx"
-
-# ✅ Αρχική σελίδα (http://.../)
-@app.route("/")
-def home():
-    return """
-    <h3>✅ Το πρόγραμμα τρέχει!</h3>
-    <p><a href="/download">Κατέβασε το πιο πρόσφατο Excel (.xlsx)</a></p>
-    """
-
-# ✅ Route για κατέβασμα αρχείου (http://.../download)
-@app.route("/download")
-def download_excel():
-    return send_file(filename, as_attachment=True)
+filename ="latest_table_paper2.xlsx"
 
 
 
 def run_all_combinations():
+    # Ρύθμιση ακρίβειας δεκαδικών ψηφίων
+    getcontext().prec = 15
+
     filename = "latest_table_paper2.xlsx"
 
 
@@ -486,9 +468,7 @@ def run_all_combinations():
         # Ξεκινάμε τη μέτρηση
         start_time = time.time()
         try:
-            solution0_prob, solution1_prob, iterations, apo0,apo1 = solve_two_same_size_systems(
-                    A0_prob, b0_prob, A1_prob, b1_prob, x0_start, x1_start,1e-8, max_iter=100000000
-                )
+            solution0_prob, solution1_prob, iterations, apo0,apo1 = solve_two_same_size_systems(A0_prob, b0_prob, A1_prob, b1_prob, x0_start, x1_start,1e-8, max_iter=100000000)
         except ValueError as e:
              rint(e)
 
@@ -730,17 +710,25 @@ def run_all_combinations():
 
 
 
-# ✅ Εκκίνηση όλων
+# 🌐 Flask app για κατέβασμα
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "<h3>✅ Το πρόγραμμα τρέχει.<br><a href='/download'>Κατέβασε τον πιο πρόσφατο πίνακα (.xlsx)</a></h3>"
+
+@app.route("/download")
+def download_excel():
+    return send_file(filename, as_attachment=True)
+
+# ✅ Εκκίνηση Flask και loop μόνο όταν τρέχει άμεσα το script
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
 
-    # 🔄 Αναμονή για να ξεκινήσει πρώτα το Flask σωστά
-    time.sleep(10)
-
-    # ▶️ Ξεκίνα τον βαρύ υπολογισμό στο background
+    # 🚀 Ξεκίνα τον βαρύ υπολογισμό σε background
     threading.Thread(target=run_all_combinations, daemon=True).start()
 
-    # ▶️ Εκκίνηση Flask web server
+    # ✅ Flask Web Server
     app.run(host="0.0.0.0", port=port)
 
 
