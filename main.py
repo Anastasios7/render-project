@@ -67,7 +67,7 @@ def run_all_combinations():
 
     for rho in rho_v:
         for r in r_values:
-            mi_values = np.arange(0.005, r - 0.001 + 1e-8, 0.001)
+            mi_values = np.arange(r-0.009, r - 0.001 + 1e-8, 0.001)
             for mi in mi_values:
                 for d in d_v:
                     # Στρογγυλοποιούμε ΜΟΝΟ όταν φτιάχνουμε το tuple
