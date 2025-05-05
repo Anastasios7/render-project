@@ -40,8 +40,32 @@ from flask import Flask, send_file
 import threading
 import os
 
+
+
 # Ρύθμιση ακρίβειας δεκαδικών ψηφίων
 getcontext().prec = 15
+
+
+# ✅ Flask app
+app = Flask(__name__)
+
+# ✅ Όνομα αρχείου Excel που δημιουργείται
+filename = "Paper 2 Machine Learning 01.xlsx"
+
+# ✅ Αρχική σελίδα (http://.../)
+@app.route("/")
+def home():
+    return """
+    <h3>✅ Το πρόγραμμα τρέχει!</h3>
+    <p><a href="/download">Κατέβασε το πιο πρόσφατο Excel (.xlsx)</a></p>
+    """
+
+# ✅ Route για κατέβασμα αρχείου (http://.../download)
+@app.route("/download")
+def download_excel():
+    return send_file(filename, as_attachment=True)
+
+
 
 def run_all_combinations():
     filename = "latest_table_paper2.xlsx"
@@ -706,25 +730,21 @@ def run_all_combinations():
             print(f"✅ Excel updated at i = {i}")
 
 
-# 🌐 Flask app για κατέβασμα
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    return "<h3>✅ Το πρόγραμμα τρέχει.<br><a href='/download'>Κατέβασε τον πιο πρόσφατο πίνακα (.xlsx)</a></h3>"
-
-@app.route("/download")
-def download_excel():
-    return send_file(filename, as_attachment=True)
 
 
-# ✅ Εκκίνηση Flask server
+
+# ✅ Εκκίνηση όλων
 if __name__ == "__main__":
-    # 🚀 Εκκίνηση loop σε background thread ώστε Flask να είναι live
-    threading.Thread(target=run_all_combinations, daemon=True).start()
-    time.sleep(15)
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=10000)
+
+    # 🔄 Αναμονή για να ξεκινήσει πρώτα το Flask σωστά
+    time.sleep(10)
+
+    # ▶️ Ξεκίνα τον βαρύ υπολογισμό στο background
+    threading.Thread(target=run_all_combinations, daemon=True).start()
+
+    # ▶️ Εκκίνηση Flask web server
+    app.run(host="0.0.0.0", port=port)
 
 
 # In[ ]:
