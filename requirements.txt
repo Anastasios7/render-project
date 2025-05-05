@@ -1,0 +1,13 @@
+decimal
+matplotlib
+numpy
+openpyxl
+pandas
+pyqt5
+scipy
+statsmodels
+sympy
+tk
+tksheet
+flask
+threading
