@@ -2,8 +2,6 @@
 # coding: utf-8
 
 # In[ ]:
-
-
 import numpy as np
 import math as math
 from sympy import Matrix, linsolve, symbols
@@ -738,7 +736,7 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
 
     # 🔄 Αναμονή για να ξεκινήσει πρώτα το Flask σωστά
-    time.sleep(15)
+    time.sleep(20)
 
     # ▶️ Ξεκίνα τον βαρύ υπολογισμό στο background
     threading.Thread(target=run_all_combinations, daemon=True).start()
