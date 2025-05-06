@@ -48,7 +48,7 @@ def run_all_combinations():
     # Ρύθμιση ακρίβειας δεκαδικών ψηφίων
     getcontext().prec = 15
 
-    filename = "latest_table_paper2.xlsx"
+    global filename
 
 
     # Ορίζουμε τα εύρη τιμών
